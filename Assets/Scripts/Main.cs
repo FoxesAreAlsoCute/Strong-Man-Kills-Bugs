@@ -41,8 +41,16 @@ public class Main : MonoBehaviour
     {
         if (GameState != eGameState.playing) return;
 
-        int r = Random.Range(0, prefabsBug.Length);
-        Instantiate(prefabsBug[r], AnchorBugs);
+        int count;
+        if (ScoreCounter.S.score >= 90) count = 3;
+        else if (ScoreCounter.S.score >= 50) count = 2;
+        else count = 1;
+
+        for (int i = 0; i < count; i++)
+        {
+            int r = Random.Range(0, prefabsBug.Length);
+            Instantiate(prefabsBug[r], AnchorBugs);
+        }
 
         Invoke("MakeBug", Random.Range(makingBugIntervalMin, makingBugIntervalMax));
     }

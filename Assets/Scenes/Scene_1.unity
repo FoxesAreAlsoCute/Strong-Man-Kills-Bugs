@@ -2820,6 +2820,7 @@ MonoBehaviour:
   disappearingState: PauseDisappear
   animationDuration: 0.5
   gameOverText: {fileID: 777811220}
+  gameOverDuration: 3
   buttonYes: {fileID: 525486335}
   buttonNo: {fileID: 1903568607}
   buttonExit: {fileID: 2142472730}

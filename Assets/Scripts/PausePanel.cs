@@ -26,6 +26,8 @@ public class PausePanel : MonoBehaviour, IPointerClickHandler
 
     public TMP_Text gameOverText;
     private string scoreString;
+    private float gameOverTime;
+    public float gameOverDuration = 3f;
 
     public GameObject buttonYes;
     public GameObject buttonNo;
@@ -87,6 +89,7 @@ public class PausePanel : MonoBehaviour, IPointerClickHandler
         switch (PauseState)
         {
             case ePauseState.gameOver:
+                if (Time.time - gameOverTime < gameOverDuration) return;
                 ShowScore();
                 break;
             case ePauseState.showingScore:
@@ -98,6 +101,7 @@ public class PausePanel : MonoBehaviour, IPointerClickHandler
     public void ShowGameOver(string scores)
     {
         PauseState = ePauseState.gameOver;
+        gameOverTime = Time.time;
         scoreString = scores;
         Appear();
     }
