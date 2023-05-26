@@ -20,14 +20,6 @@ public class ScoreCounter : MonoBehaviour
     public TMP_Text bugsCountText;
     public TMP_Text scoreText;
     public TMP_Text timeText;
-    public string bugsCountString = "Bugs left: ";
-    public string scoreString = "Score: ";
-    public string timeString = "Time: ";
-
-    public string gotHighScoreString = "Highscore!";
-    public string highScoreString = "Highscore: ";
-    public string bugsKilledString = "Bugs killed: ";
-    public string bugsRanOffString = "Bugs ran off: ";
 
     private void Awake()
     {
@@ -63,11 +55,11 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateGUI()
     {
-        bugsCountText.text = bugsCountString + bugsCount;
+        bugsCountText.text = "Bugs left: " + bugsCount;
         if (bugsCount > 7) bugsCountText.color = Color.red;
         else if (bugsCount > 5) bugsCountText.color = Color.yellow;
         else bugsCountText.color = Color.white;
-        scoreText.text = scoreString + score;
+        scoreText.text = "Score: " + score;
     }
 
     private void Update()
@@ -89,14 +81,14 @@ public class ScoreCounter : MonoBehaviour
         string outputString = "";
         if (highScore < score)
         {
-            outputString = $"{gotHighScoreString}";
+            outputString = "Highscore!";
             highScore = score;
             PlayerPrefs.SetInt(AlphaMain.ScorePrefsKey, highScore);
             PlayerPrefs.SetString(AlphaMain.TimePrefsKey, timeText.text);
         }
-        else outputString = $"{highScoreString}{highScore}";
+        else outputString = $"Highscore: {highScore}";
 
-        outputString += $"\n{scoreString}{score}\n{timeString}{timeText.text}\n{bugsKilledString}{bugsKilled}\n{bugsRanOffString}{bugsRanOff}";
+        outputString += $"\nScore: {score}\nTime: {timeText.text}\nBugs killed: {bugsKilled}\nBugs ran off: {bugsRanOff}";
         PausePanel.S.ShowGameOver(outputString);
     }
 }

@@ -25,18 +25,17 @@ public class AlphaMain : MonoBehaviour
 
     public void Play()
     {
+        AudioManager.S.Click();
         Debug.Log("Play");
         SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
     }
 
-    private void Quit()
-    {
-        Debug.Log("Quit");
-        Application.Quit();
-    }
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Quit();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
     }
 }

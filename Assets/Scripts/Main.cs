@@ -5,6 +5,7 @@ using UnityEngine;
 public enum eGameState
 {
     idle,
+    pause,
     playing,
     over
 }
@@ -53,5 +54,11 @@ public class Main : MonoBehaviour
         go.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-180, 180)));
         int r = Random.Range(0, bloodSpotsSprites.Length);
         go.GetComponent<SpriteRenderer>().sprite = bloodSpotsSprites[r];
+    }
+
+    public void Pause(bool pause)
+    {
+        GameState = pause ? eGameState.pause : eGameState.playing;
+        Invoke("MakeBug", Random.Range(makingBugIntervalMin, makingBugIntervalMax));
     }
 }
