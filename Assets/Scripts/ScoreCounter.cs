@@ -21,6 +21,8 @@ public class ScoreCounter : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text timeText;
 
+    private float timeStart;
+
     private void Awake()
     {
         if (S == null) S = this;
@@ -35,6 +37,11 @@ public class ScoreCounter : MonoBehaviour
         bugsKilled = 0;
         bugsRanOff = 0;
         UpdateGUI();
+    }
+
+    private void Start()
+    {
+        timeStart = Time.time;
     }
 
     public void AddBug()
@@ -66,7 +73,7 @@ public class ScoreCounter : MonoBehaviour
     {
         if (Main.GameState != eGameState.playing) return;
 
-        float t = Time.time;
+        float t = Time.time - timeStart;
         string timeFormat = "mm':'ss";
         if (t >= 3600) timeFormat = "hh':'mm':'ss";
         TimeSpan timeSpan = TimeSpan.FromSeconds(t);
