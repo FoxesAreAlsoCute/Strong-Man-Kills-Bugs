@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum eGameState
@@ -41,10 +39,9 @@ public class Main : MonoBehaviour
     {
         if (GameState != eGameState.playing) return;
 
-        int count;
-        if (ScoreCounter.S.score >= 90) count = 3;
-        else if (ScoreCounter.S.score >= 50) count = 2;
-        else count = 1;
+        int count = 1;
+        //if (ScoreCounter.S.score >= 90) count = 3;
+        //else if (ScoreCounter.S.score >= 50) count = 2;
 
         for (int i = 0; i < count; i++)
         {
@@ -62,6 +59,8 @@ public class Main : MonoBehaviour
         go.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-180, 180)));
         int r = Random.Range(0, bloodSpotsSprites.Length);
         go.GetComponent<SpriteRenderer>().sprite = bloodSpotsSprites[r];
+
+        Face.S.ShowHappyFace();
     }
 
     public void Pause(bool pause)

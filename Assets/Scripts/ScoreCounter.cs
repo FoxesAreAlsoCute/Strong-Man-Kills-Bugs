@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using TMPro;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 public class ScoreCounter : MonoBehaviour
@@ -14,6 +10,8 @@ public class ScoreCounter : MonoBehaviour
     public int score;
     public int bugsCount;
     public int maxBugs = 10;
+    public int highBugsCount;
+    public int lowBugsCount;
     public int bugsKilled;
     public int bugsRanOff;
 
@@ -31,6 +29,9 @@ public class ScoreCounter : MonoBehaviour
         if (PlayerPrefs.HasKey(AlphaMain.ScorePrefsKey))
             highScore = PlayerPrefs.GetInt(AlphaMain.ScorePrefsKey);
         else highScore = 0;
+
+        lowBugsCount = maxBugs / 2;
+        highBugsCount = maxBugs - (lowBugsCount / 2);
 
         score = 0;
         bugsCount = 0;
@@ -63,8 +64,8 @@ public class ScoreCounter : MonoBehaviour
     private void UpdateGUI()
     {
         bugsCountText.text = "Bugs left: " + bugsCount;
-        if (bugsCount > 7) bugsCountText.color = Color.red;
-        else if (bugsCount > 5) bugsCountText.color = Color.yellow;
+        if (bugsCount >= highBugsCount) bugsCountText.color = Color.red;
+        else if (bugsCount >= lowBugsCount) bugsCountText.color = Color.yellow;
         else bugsCountText.color = Color.white;
         scoreText.text = "Score: " + score;
     }
